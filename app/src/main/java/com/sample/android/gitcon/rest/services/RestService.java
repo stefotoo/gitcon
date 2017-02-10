@@ -1,5 +1,7 @@
 package com.sample.android.gitcon.rest.services;
 
+import com.sample.android.gitcon.models.Follower;
+import com.sample.android.gitcon.models.Following;
 import com.sample.android.gitcon.models.Repository;
 import com.sample.android.gitcon.models.User;
 
@@ -11,15 +13,15 @@ import retrofit.http.Path;
 public interface RestService {
 
     @GET("/users/{username}")
-    User getUserDetails(@Path("username") String userName);
+    User getUserDetails(@Path("username") String username);
 
     @GET("/users/{username}/repos")
-    List<Repository> getUserRepos(@Path("username") String userName);
+    List<Repository> getUserRepos(@Path("username") String username);
 
     @GET("/users/{username}/followers")
-    List<User> getUserFollowers(@Path("username") String userName);
+    List<Follower> getUserFollowers(@Path("username") String username);
 
     @GET("/users/{username}/following")
-    List<User> getUserFollowing(@Path("username") String userName);
+    List<Following> getUserFollowing(@Path("username") String username);
 
 }

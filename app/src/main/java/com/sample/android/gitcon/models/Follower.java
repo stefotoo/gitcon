@@ -2,8 +2,8 @@ package com.sample.android.gitcon.models;
 
 import com.sample.android.gitcon.models.abstracts.AUser;
 
-public class User extends AUser {
+public class Follower extends AUser {
 
     // constructor
-    public User() {}
+    public Follower() {}
 }
