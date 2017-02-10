@@ -1,22 +1,21 @@
 package com.sample.android.gitcon.models;
 
 import com.google.gson.annotations.SerializedName;
+import com.sample.android.gitcon.models.abstracts.ASugarRecord;
 
-public class User {
+public class User extends ASugarRecord<User> {
 
     // variables
     @SerializedName("login")
     private String login;
     @SerializedName("avatar_url")
     private String avatarUrl;
-    @SerializedName("url")
-    private String url;
+    @SerializedName("name")
+    private String name;
     @SerializedName("followers_url")
     private String followersUrl;
     @SerializedName("following_url")
     private String followingUrl;
-    @SerializedName("name")
-    private String name;
     @SerializedName("bio")
     private String bio;
     @SerializedName("location")
@@ -50,14 +49,6 @@ public class User {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public String getFollowersUrl() {
