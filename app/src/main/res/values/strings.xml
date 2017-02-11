@@ -20,6 +20,7 @@
 
     <!-- Dialogs -->
     <string name="dialog_sign_in_message">Logging in…</string>
+    <string name="dialog_loading">Loading data…</string>
 
     <!-- Menus -->
     <string name="menu_logout">Log out</string>

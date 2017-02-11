@@ -26,6 +26,7 @@ import com.sample.android.gitcon.tasks.GetUserReposApiTask;
 import com.sample.android.gitcon.tasks.LogOutTask;
 import com.sample.android.gitcon.tasks.abstracts.SimpleTask;
 import com.sample.android.gitcon.ui.DividerItemDecoration;
+import com.sample.android.gitcon.ui.GitconProgressDialog;
 import com.sample.android.gitcon.utils.Util;
 import com.squareup.picasso.Picasso;
 
@@ -54,6 +55,8 @@ public class UserDetailsActivity
     @Bind(R.id.rv_activity_user_details)
     RecyclerView rv;
 
+    private GitconProgressDialog pd;
+
     // get intent methods
     public static Intent getIntent(Context context, AUser user) {
         Intent intent = new Intent(context, UserDetailsActivity.class);
@@ -72,12 +75,8 @@ public class UserDetailsActivity
         initExtras();
         initVariables();
         setupToolbar();
-        setupRecyclerView();
+        setupUi();
         getRepositories();
-
-        if (Util.isStringNotNull(mUserAsJson) && !mUserAsJson.equals("null")) {
-            executeUserDetailsRequest();
-        }
     }
 
     @Override
@@ -111,6 +110,7 @@ public class UserDetailsActivity
                 AppPreferences.getUser(this);
         Picasso picasso = Picasso.with(this);
         mAdapter = new RepositoriesAdapter(this, picasso, mUser, this);
+        pd = new GitconProgressDialog(this);
     }
 
     private void setupToolbar() {
@@ -121,10 +121,13 @@ public class UserDetailsActivity
         }
     }
 
-    private void setupRecyclerView() {
+    private void setupUi() {
+        // RecyclerView
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.addItemDecoration(new DividerItemDecoration(this));
         rv.setAdapter(mAdapter);
+        // ProgressDialog
+        pd.setMessage(getString(R.string.dialog_loading));
     }
 
     private void getRepositories() {
@@ -134,7 +137,7 @@ public class UserDetailsActivity
                 new SimpleTask.SimpleCallback<List<Repository>>() {
             @Override
             public void onStart() {
-
+                pd.show();
             }
 
             @Override
@@ -142,8 +145,15 @@ public class UserDetailsActivity
                 if (Util.isListNotEmpty(res)) {
                     mAdapter.addData(res, true);
                 }
+
+                if (Util.isStringNotNull(mUserAsJson) &&
+                        !mUserAsJson.equals("null")) {
+                    executeUserDetailsRequest();
+                } else {
+                    pd.dismiss();
+                }
             }
-        }).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        }).execute();
     }
 
     private void executeUserDetailsRequest() {
@@ -153,17 +163,19 @@ public class UserDetailsActivity
                 new SimpleTask.SimpleCallback<AUser>() {
                     @Override
                     public void onStart() {
-                        // TODO
+                        // Do nothing. Progress dialog is already showing.
                     }
 
                     @Override
                     public void onComplete(AUser res, String errorMessage) {
+                        pd.dismiss();
+
                         if (res != null) {
                             mUser = res;
                             mAdapter.updateUser(mUser, true);
                         }
                     }
-                }).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                }).execute();
     }
 
     private void logOut() {
@@ -176,6 +188,7 @@ public class UserDetailsActivity
             @Override
             public void onComplete(Void res, String errorMessage) {
                 startActivity(LoginActivity.getIntent(UserDetailsActivity.this));
+                overridePendingTransition(0,0);
                 finish();
             }
         }).execute();

@@ -11,13 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.sample.android.gitcon.R;
-import com.sample.android.gitcon.adapters.RepositoriesAdapter;
 import com.sample.android.gitcon.adapters.UserListAdapter;
 import com.sample.android.gitcon.models.Follower;
 import com.sample.android.gitcon.models.Following;
-import com.sample.android.gitcon.models.User;
 import com.sample.android.gitcon.models.abstracts.AUser;
-import com.sample.android.gitcon.preferences.AppPreferences;
 import com.sample.android.gitcon.tasks.GetUserFollowersApiTask;
 import com.sample.android.gitcon.tasks.GetUserFollowingApiTask;
 import com.sample.android.gitcon.tasks.abstracts.SimpleTask;
