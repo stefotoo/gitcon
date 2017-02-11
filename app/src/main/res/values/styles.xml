@@ -1,11 +1,57 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorAccent">@color/accent</item>
     </style>
 
+    <style name="TransparentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <!-- buttons -->
+    <style name="LoginButtonStyle" parent="Material.Drawable.Ripple.Touch.Light">
+        <item name="android:background">@drawable/bg_btn_login</item>
+        <item name="rd_rippleColor">#33000000</item>
+        <item name="rd_delayClick">afterRelease</item>
+        <item name="android:elevation">@dimen/elevation_2</item>
+        <item name="android:textSize">@dimen/text_size_5</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:paddingLeft">@dimen/padding_1</item>
+        <item name="android:paddingRight">@dimen/padding_1</item>
+    </style>
+
+    <style name="LightFlatButtonRippleStyle" parent="Material.Drawable.Ripple.Touch.Light">
+        <item name="android:background">@null</item>
+        <item name="rd_cornerRadius">4dp</item>
+        <item name="android:textColor">@color/abc_primary_text_material_light</item>
+    </style>
+
+    <!-- material edit text -->
+    <style name="EditTextUserStyle" parent="Widget.AppCompat.EditText">
+        <item name="met_baseColor">@android:color/black</item>
+        <item name="met_textColor">@android:color/black</item>
+        <item name="met_textColorHint">@color/textSecondary</item>
+        <item name="met_primaryColor">@android:color/black</item>
+        <item name="met_floatingLabelTextColor">@android:color/black</item>
+        <item name="met_floatingLabel">highlight</item>
+        <item name="met_validateOnFocusLost">true</item>
+        <item name="android:cursorVisible">true</item>
+        <item name="android:textSize">@dimen/text_size_5</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+
+    <!-- progress -->
+    <style name="ProgressStyle" parent="Material.Drawable.CircularProgress">
+        <item name="cpd_strokeColor">@color/accent</item>
+        <item name="cpd_strokeSecondaryColor">@color/accentLight</item>
+    </style>
 </resources>

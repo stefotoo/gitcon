@@ -11,24 +11,16 @@ public class AUser extends ASugarRecord {
     private String avatarUrl;
     @SerializedName("name")
     private String name;
-    @SerializedName("followers_url")
-    private String followersUrl;
-    @SerializedName("following_url")
-    private String followingUrl;
     @SerializedName("bio")
     private String bio;
     @SerializedName("location")
     private String location;
-    @SerializedName("email")
-    private String email;
     @SerializedName("followers")
     private int followers;
     @SerializedName("following")
     private int following;
     @SerializedName("public_repos")
     private int publicReposCount;
-    @SerializedName("updated_at")
-    private String updatedAt;
 
     // getters and setters
     public String getLogin() {
@@ -45,22 +37,6 @@ public class AUser extends ASugarRecord {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
-    }
-
-    public String getFollowersUrl() {
-        return followersUrl;
-    }
-
-    public void setFollowersUrl(String followersUrl) {
-        this.followersUrl = followersUrl;
-    }
-
-    public String getFollowingUrl() {
-        return followingUrl;
-    }
-
-    public void setFollowingUrl(String followingUrl) {
-        this.followingUrl = followingUrl;
     }
 
     public String getName() {
@@ -87,14 +63,6 @@ public class AUser extends ASugarRecord {
         this.location = location;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public int getFollowers() {
         return followers;
     }
@@ -117,13 +85,5 @@ public class AUser extends ASugarRecord {
 
     public void setPublicReposCount(int publicReposCount) {
         this.publicReposCount = publicReposCount;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

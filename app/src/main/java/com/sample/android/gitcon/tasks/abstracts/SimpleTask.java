@@ -33,7 +33,7 @@ public abstract class SimpleTask<P, E> extends AsyncTask<Void, P, E> {
         mIsWorking = false;
 
         if (mCallback != null) {
-            mCallback.onComplete(e);
+            mCallback.onComplete(e, getErrorMessage());
         }
     }
 
@@ -41,10 +41,11 @@ public abstract class SimpleTask<P, E> extends AsyncTask<Void, P, E> {
         return mIsWorking;
     }
 
+    protected abstract String getErrorMessage();
+
     // callbacks
     public interface SimpleCallback<E> {
         void onStart();
-
-        void onComplete(E res);
+        void onComplete(E res, String errorMessage);
     }
 }

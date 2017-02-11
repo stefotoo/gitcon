@@ -28,6 +28,11 @@ public abstract class ASugarRecord<T> extends SugarRecord {
         new SimpleTask<Void, List<T>>(callback) {
 
             @Override
+            protected String getErrorMessage() {
+                return null;
+            }
+
+            @Override
             protected List<T> doInBackground(Void... params) {
                 return listAll(clazz);
             }
@@ -42,6 +47,11 @@ public abstract class ASugarRecord<T> extends SugarRecord {
     protected static <T> void findAllObjectsSortedByCreatedAt(final Class<T> clazz,
                                                               SimpleTask.SimpleCallback<List<T>> callback) {
         new SimpleTask<Void, List<T>>(callback) {
+
+            @Override
+            protected String getErrorMessage() {
+                return null;
+            }
 
             @Override
             protected List<T> doInBackground(Void... params) {
@@ -59,6 +69,11 @@ public abstract class ASugarRecord<T> extends SugarRecord {
                                              final Long id,
                                              SimpleTask.SimpleCallback<T> callback) {
         new SimpleTask<Void, T>(callback) {
+
+            @Override
+            protected String getErrorMessage() {
+                return null;
+            }
 
             @Override
             protected T doInBackground(Void... params) {
@@ -91,6 +106,11 @@ public abstract class ASugarRecord<T> extends SugarRecord {
         new SimpleTask<Void, List<T>>(callback) {
 
             @Override
+            protected String getErrorMessage() {
+                return null;
+            }
+
+            @Override
             protected List<T> doInBackground(Void... params) {
                 return findAllObjectsIds(clazz, table);
             }
@@ -103,6 +123,11 @@ public abstract class ASugarRecord<T> extends SugarRecord {
         new SimpleTask<Void, Long>(callback) {
 
             @Override
+            protected String getErrorMessage() {
+                return null;
+            }
+
+            @Override
             protected Long doInBackground(Void... params) {
                 return save();
             }
@@ -111,6 +136,11 @@ public abstract class ASugarRecord<T> extends SugarRecord {
 
     public void deleteAsync(SimpleTask.SimpleCallback<Boolean> callback) {
         new SimpleTask<Void, Boolean>(callback) {
+
+            @Override
+            protected String getErrorMessage() {
+                return null;
+            }
 
             @Override
             protected Boolean doInBackground(Void... params) {

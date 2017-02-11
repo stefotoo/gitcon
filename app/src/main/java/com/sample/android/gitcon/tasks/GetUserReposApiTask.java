@@ -5,7 +5,10 @@ import android.content.Context;
 import com.sample.android.gitcon.models.Repository;
 import com.sample.android.gitcon.rest.RestClient;
 import com.sample.android.gitcon.tasks.abstracts.ApiListTask;
+import com.sample.android.gitcon.utils.Util;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class GetUserReposApiTask extends ApiListTask<Repository> {
@@ -16,12 +19,23 @@ public class GetUserReposApiTask extends ApiListTask<Repository> {
 
     @Override
     protected List<Repository> getObjectsFromApi() throws Exception {
-        return new RestClient().getAuthRestService().getUserRepos(mUsername);
+        List<Repository> repositories =
+                new RestClient().getAuthRestService().getUserRepos(mUsername);
+        if (Util.isListNotEmpty(repositories)) {
+            Collections.sort(repositories);
+        }
+
+        return repositories;
     }
 
     @Override
     protected List<Repository> getObjectsFromLocalDb() {
-        return Repository.listAll(getObjectClass());
+        List<Repository> repositories = Repository.listAll(getObjectClass());
+        if (Util.isListNotEmpty(repositories)) {
+            Collections.sort(repositories);
+        }
+
+        return repositories;
     }
 
     @Override

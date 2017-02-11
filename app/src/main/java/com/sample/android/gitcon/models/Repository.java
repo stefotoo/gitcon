@@ -1,9 +1,13 @@
 package com.sample.android.gitcon.models;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 import com.sample.android.gitcon.models.abstracts.ASugarRecord;
 
-public class Repository extends ASugarRecord<Repository> {
+public class Repository
+        extends ASugarRecord<Repository>
+        implements Comparable<Repository> {
 
     // variables
     @SerializedName("name")
@@ -49,5 +53,14 @@ public class Repository extends ASugarRecord<Repository> {
 
     public void setForksCount(int forksCount) {
         this.forksCount = forksCount;
+    }
+
+    @Override
+    public int compareTo(@NonNull Repository repository) {
+        if (forksCount - repository.getForksCount() == 0) {
+            return repository.getWatchersCount() - this.watchersCount;
+        } else {
+            return repository.getForksCount() - this.forksCount;
+        }
     }
 }

@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Gitcon</string>
+
+    <!-- Error messages -->
+    <string name="error_login_not_recognized">Username not recognized!</string>
+    <string name="error_no_connection">No connection available!</string>
+    <string name="error_empty_username">Please enter non-empty username</string>
+
+    <!-- Titles -->
+    <string name="title_followers">Followers</string>
+    <string name="title_following">Following</string>
+
+    <!-- Hints -->
+    <string name="hint_username">Github username</string>
+
+    <!-- Controls -->
+    <string name="btn_login">Login</string>
+    <string name="tv_followers_count">%d followers</string>
+    <string name="tv_following_count">%d following</string>
+
+    <!-- Dialogs -->
+    <string name="dialog_sign_in_message">Logging in…</string>
+
+    <!-- Menus -->
+    <string name="menu_logout">Log out</string>
+
+
 </resources>

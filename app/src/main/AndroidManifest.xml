@@ -17,12 +17,27 @@
         android:theme="@style/AppTheme">
 
         <!-- Activities -->
-        <activity android:name=".activities.LoadActivity">
+        <activity
+            android:name=".activities.LoadActivity"
+            android:theme="@style/TransparentTheme"
+            android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activities.LoginActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+
+        <activity
+            android:name=".activities.UserDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+
+        <activity
+            android:name=".activities.UsersListActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
 
         <!-- Sugar ORM meta -->
         <meta-data android:name="DATABASE" android:value="sugar.db" />

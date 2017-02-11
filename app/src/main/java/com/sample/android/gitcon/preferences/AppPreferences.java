@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.sample.android.gitcon.models.User;
+import com.sample.android.gitcon.models.abstracts.AUser;
 
 public class AppPreferences {
 
@@ -33,11 +34,11 @@ public class AppPreferences {
         clearAll(context);
     }
 
-    public static User getUser(Context context) {
-        return new Gson().fromJson(getPref(context).getString(KEY_USER, null), User.class);
+    public static AUser getUser(Context context) {
+        return new Gson().fromJson(getPref(context).getString(KEY_USER, null), AUser.class);
     }
 
-    public static void setUser(Context context, User user) {
+    public static void setUser(Context context, AUser user) {
         SharedPreferences.Editor editor = getEditor(context);
 
         editor.putString(KEY_USER, new Gson().toJson(user));

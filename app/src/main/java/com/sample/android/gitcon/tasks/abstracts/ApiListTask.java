@@ -52,6 +52,11 @@ public abstract class ApiListTask<E extends ASugarRecord> extends SimpleTask<Voi
         }
     }
 
+    @Override
+    protected String getErrorMessage() {
+        return null;
+    }
+
     // abstract methods
     protected abstract List<E> getObjectsFromApi() throws Exception;
     protected abstract List<E> getObjectsFromLocalDb();
