@@ -13,14 +13,14 @@
         android:useLevel="false" >
 
         <size
-            android:height="60dip"
-            android:width="60dip" />
+            android:height="60dp"
+            android:width="60dp" />
 
         <gradient
-            android:centerColor="@color/primary"
+            android:centerColor="@android:color/holo_green_light"
             android:centerY="0.50"
             android:endColor="@color/primaryDark"
-            android:startColor="@color/alert"
+            android:startColor="@color/bg_btn_login"
             android:type="sweep"
             android:useLevel="false" />
     </shape>

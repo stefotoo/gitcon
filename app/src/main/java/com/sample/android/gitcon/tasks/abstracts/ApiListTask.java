@@ -11,14 +11,16 @@ import java.util.List;
 public abstract class ApiListTask<E extends ASugarRecord> extends SimpleTask<Void, List<E>> {
 
     // variables
-    protected Context mContext;
+    private Context mContext;
+    private boolean mShouldUseLocalDb;
     protected String mUsername;
 
     // constructors
-    public ApiListTask(Context context, String username, SimpleCallback<List<E>> callback) {
+    public ApiListTask(Context context, String username, boolean shouldUseLocalDb, SimpleCallback<List<E>> callback) {
         super(callback);
         this.mContext = context;
         this.mUsername = username;
+        this.mShouldUseLocalDb = shouldUseLocalDb;
     }
 
     // methods
@@ -26,10 +28,10 @@ public abstract class ApiListTask<E extends ASugarRecord> extends SimpleTask<Voi
     protected List<E> doInBackground(Void... params) {
         try {
             final List<E> newObjects = getObjectsFromApi();
-            if (newObjects == null) {
+            if (newObjects == null && mShouldUseLocalDb) {
                 return getObjectsFromLocalDb();
             } else {
-                if (shouldSaveInLocalDb()) {
+                if (mShouldUseLocalDb && shouldSaveInLocalDb()) {
                     SugarRecord.deleteAll(getObjectClass());
                     SugarTransactionHelper.doInTransaction(
                             new SugarTransactionHelper.Callback() {
@@ -48,7 +50,7 @@ public abstract class ApiListTask<E extends ASugarRecord> extends SimpleTask<Voi
             return newObjects;
         } catch (Exception e) {
             e.printStackTrace();
-            return getObjectsFromLocalDb();
+            return mShouldUseLocalDb ? getObjectsFromLocalDb() : null;
         }
     }
 

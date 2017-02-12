@@ -8,15 +8,20 @@ import com.sample.android.gitcon.tasks.abstracts.ApiListTask;
 import com.sample.android.gitcon.utils.Util;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class GetUserReposApiTask extends ApiListTask<Repository> {
 
-    public GetUserReposApiTask(Context context, String username, SimpleCallback<List<Repository>> callback) {
-        super(context, username, callback);
+    // constructor
+    public GetUserReposApiTask(
+            Context context,
+            String username,
+            boolean shouldUseLocalDb,
+            SimpleCallback<List<Repository>> callback) {
+        super(context, username, shouldUseLocalDb, callback);
     }
 
+    // methods
     @Override
     protected List<Repository> getObjectsFromApi() throws Exception {
         List<Repository> repositories =

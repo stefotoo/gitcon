@@ -27,7 +27,8 @@ public class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     // constants
     private static final int TYPE_HEADER = 1;
-    private static final int TYPE_REPOSITORY = 2;
+    private static final int TYPE_INFO = 2;
+    private static final int TYPE_REPOSITORY = 3;
 
     // variables
     private Context mContext;
@@ -61,6 +62,13 @@ public class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                 .inflate(R.layout.item_header, parent, false));
             }
 
+            case TYPE_INFO: {
+                return new InfoHolder(
+                        LayoutInflater
+                                .from(mContext)
+                                .inflate(R.layout.item_info, parent, false));
+            }
+
             case TYPE_REPOSITORY: {
                 return new RepositoriesHolder(
                         LayoutInflater
@@ -88,6 +96,15 @@ public class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 break;
             }
 
+            case TYPE_INFO: {
+                InfoHolder hldr = (InfoHolder) holder;
+                Repository repository = mRepositories.get(position);
+
+                hldr.tvInfo.setText(repository.getDescription());
+
+                break;
+            }
+
             case TYPE_HEADER: {
                 HeaderHolder hldr = (HeaderHolder) holder;
 
@@ -95,6 +112,20 @@ public class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         mUser != null ? mUser.getFollowers() : 0));
                 hldr.btnFollowing.setText(mContext.getString(R.string.tv_following_count,
                         mUser != null ? mUser.getFollowing() : 0));
+
+                if (mUser != null && Util.isStringNotNull(mUser.getLocation())) {
+                    hldr.tvLocation.setVisibility(View.VISIBLE);
+                    hldr.tvLocation.setText(mContext.getString(R.string.tv_location, mUser.getLocation()));
+                } else {
+                    hldr.tvLocation.setVisibility(View.GONE);
+                }
+
+                if (mUser != null && Util.isStringNotNull(mUser.getBio())) {
+                    hldr.tvBio.setVisibility(View.VISIBLE);
+                    hldr.tvBio.setText(mContext.getString(R.string.tv_bio, mUser.getBio()));
+                } else {
+                    hldr.tvBio.setVisibility(View.GONE);
+                }
 
                 if (mUser != null && Util.isStringNotNull(mUser.getAvatarUrl())) {
                     mPicasso
@@ -120,7 +151,19 @@ public class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemViewType(int position) {
-        return position == 0 ? TYPE_HEADER : TYPE_REPOSITORY;
+        switch (position) {
+            case 0: {
+                return TYPE_HEADER;
+            }
+
+            case 1: {
+                return TYPE_INFO;
+            }
+
+            default: {
+                return TYPE_REPOSITORY;
+            }
+        }
     }
 
     @Override
@@ -140,6 +183,14 @@ public class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
+    public void addInfo(Repository repository, boolean notify) {
+        mRepositories.add(repository);
+
+        if (notify) {
+            notifyDataSetChanged();
+        }
+    }
+
     public void updateUser(AUser user, boolean notify) {
         this.mUser = user;
 
@@ -150,6 +201,7 @@ public class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private void initData() {
         mRepositories = new ArrayList<>();
+        // header item
         mRepositories.add(new Repository());
     }
 
@@ -173,6 +225,19 @@ public class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
+    public class InfoHolder extends RecyclerView.ViewHolder {
+
+        // UI
+        @Bind(R.id.tv_item_info)
+        TextView tvInfo;
+
+        // constructor
+        public InfoHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+    }
+
     public class HeaderHolder
             extends RecyclerView.ViewHolder
             implements View.OnClickListener {
@@ -184,6 +249,10 @@ public class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         Button btnFollowing;
         @Bind(R.id.iv_item_header_avatar)
         ImageView ivAvatar;
+        @Bind(R.id.tv_item_header_location)
+        TextView tvLocation;
+        @Bind(R.id.tv_item_header_bio)
+        TextView tvBio;
 
         // constructor
         public HeaderHolder(View itemView) {

@@ -26,16 +26,25 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
+    // support libraries
     compile 'com.android.support:appcompat-v7:25.1.1'
     compile 'com.android.support:design:25.1.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
-    // http://square.github.io/retrofit/
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.github.satyan:sugar:1.4'
+
+    // design libraries
     compile 'com.github.rey5137:material:1.2.4'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
+    // http://square.github.io/retrofit/
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    // http://jakewharton.github.io/butterknife
+    compile 'com.jakewharton:butterknife:7.0.1'
+    // http://satyan.github.io/sugar
+    compile 'com.github.satyan:sugar:1.4'
+    // https://github.com/greenrobot/EventBus
+    compile 'org.greenrobot:eventbus:3.0.0'
 
     testCompile 'junit:junit:4.12'
 }

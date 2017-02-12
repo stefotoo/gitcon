@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.sample.android.gitcon.preferences.AppPreferences;
+import com.sample.android.gitcon.services.SynchronizeUserService;
 
 public class LoadActivity extends AppCompatActivity {
 
@@ -24,10 +25,14 @@ public class LoadActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        syncUser();
         goToNextScreen();
         overridePendingTransition(0,0);
         finish();
+    }
+
+    private void syncUser() {
+        startService(SynchronizeUserService.getIntent(this));
     }
 
     private void goToNextScreen() {

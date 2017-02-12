@@ -3,16 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bg_btn_login">
+    android:background="@color/bg_btn_login"
+    android:padding="@dimen/padding_8">
     <ImageView
         android:id="@+id/iv_item_header_avatar"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/margin_16"
-        android:layout_marginLeft="@dimen/margin_8"
-        android:layout_marginRight="@dimen/margin_8"
-        android:layout_marginBottom="@dimen/margin_8"
+        android:layout_margin="@dimen/margin_8"
         android:src="@drawable/github_logo"/>
     <View
         android:id="@+id/v_item_header_divider"
@@ -20,7 +18,7 @@
         android:layout_height="24dp"
         android:layout_marginLeft="@dimen/margin_8"
         android:layout_marginRight="@dimen/margin_8"
-        android:layout_marginBottom="@dimen/margin_16"
+        android:layout_marginBottom="@dimen/margin_8"
         android:layout_below="@id/iv_item_header_avatar"
         android:background="@android:color/white"
         android:layout_centerHorizontal="true" />
@@ -46,4 +44,30 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/text_size_5"
         style="@style/Material.Drawable.Ripple.Touch.Light"/>
+    <TextView
+        android:id="@+id/tv_item_header_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_4"
+        android:layout_marginLeft="@dimen/margin_8"
+        android:layout_marginRight="@dimen/margin_8"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_size_5"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_item_header_following"/>
+    <TextView
+        android:id="@+id/tv_item_header_bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_4"
+        android:layout_marginLeft="@dimen/margin_8"
+        android:layout_marginRight="@dimen/margin_8"
+        android:gravity="center"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_size_5"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tv_item_header_location"/>
 </RelativeLayout>

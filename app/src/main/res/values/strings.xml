@@ -17,6 +17,9 @@
     <string name="btn_login">Login</string>
     <string name="tv_followers_count">%d followers</string>
     <string name="tv_following_count">%d following</string>
+    <string name="tv_repositories_count">%d repositories</string>
+    <string name="tv_location">Location: %s</string>
+    <string name="tv_bio">Bio: %s</string>
 
     <!-- Dialogs -->
     <string name="dialog_sign_in_message">Logging in…</string>
@@ -25,5 +28,7 @@
     <!-- Menus -->
     <string name="menu_logout">Log out</string>
 
+    <!-- Empty states -->
+    <string name="empty_no_data_available">No data available.</string>
 
 </resources>

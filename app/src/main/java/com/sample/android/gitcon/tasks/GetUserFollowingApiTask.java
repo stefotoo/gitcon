@@ -10,8 +10,13 @@ import java.util.List;
 
 public class GetUserFollowingApiTask extends ApiListTask<Following> {
 
-    public GetUserFollowingApiTask(Context context, String username, SimpleCallback<List<Following>> callback) {
-        super(context, username, callback);
+    // constructor
+    public GetUserFollowingApiTask(
+            Context context,
+            String username,
+            boolean shouldUseLocalDb,
+            SimpleCallback<List<Following>> callback) {
+        super(context, username, shouldUseLocalDb, callback);
     }
 
     @Override

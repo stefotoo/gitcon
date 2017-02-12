@@ -39,6 +39,9 @@
             android:name=".activities.UsersListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
 
+        <!-- Services -->
+        <service android:name=".services.SynchronizeUserService" />
+
         <!-- Sugar ORM meta -->
         <meta-data android:name="DATABASE" android:value="sugar.db" />
         <meta-data android:name="VERSION" android:value="1" />

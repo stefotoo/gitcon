@@ -22,6 +22,10 @@ public class Repository
     // constructor
     public Repository() {}
 
+    public Repository(String description) {
+        setDescription(description);
+    }
+
     // methods
     public String getName() {
         return name;

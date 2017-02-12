@@ -2,11 +2,8 @@ package com.sample.android.gitcon.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -16,9 +13,9 @@ import android.view.MenuItem;
 
 import com.google.gson.Gson;
 import com.sample.android.gitcon.R;
+import com.sample.android.gitcon.activities.abstracts.AActivity;
 import com.sample.android.gitcon.adapters.RepositoriesAdapter;
 import com.sample.android.gitcon.models.Repository;
-import com.sample.android.gitcon.models.User;
 import com.sample.android.gitcon.models.abstracts.AUser;
 import com.sample.android.gitcon.preferences.AppPreferences;
 import com.sample.android.gitcon.tasks.GetUserDetailsApiTask;
@@ -36,7 +33,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class UserDetailsActivity
-        extends AppCompatActivity
+        extends AActivity
         implements RepositoriesAdapter.FollowingFollowersClickListener {
 
     // constants
@@ -80,6 +77,20 @@ public class UserDetailsActivity
     }
 
     @Override
+    protected void updateUiOnUserUpdate(AUser user) {
+        if (mUser != null && mUser.getLogin().equals(user.getLogin())) {
+            if (mAdapter != null) {
+                mUser = user;
+                mAdapter.updateUser(user, true);
+
+                if (Util.isStringNotNull(mUser.getName())) {
+                    getSupportActionBar().setTitle(mUser.getName());
+                }
+            }
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_logout, menu);
@@ -115,6 +126,9 @@ public class UserDetailsActivity
 
     private void setupToolbar() {
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         if (mUser != null && Util.isStringNotNull(mUser.getName())) {
             getSupportActionBar().setTitle(mUser.getName());
@@ -134,6 +148,7 @@ public class UserDetailsActivity
         new GetUserReposApiTask(
                 this,
                 mUser.getLogin(),
+                Util.isStringNull(mUserAsJson) || mUserAsJson.equals("null"),
                 new SimpleTask.SimpleCallback<List<Repository>>() {
             @Override
             public void onStart() {
@@ -143,7 +158,10 @@ public class UserDetailsActivity
             @Override
             public void onComplete(List<Repository> res, String errorMessage) {
                 if (Util.isListNotEmpty(res)) {
+                    mAdapter.addInfo(new Repository(getString(R.string.tv_repositories_count, res.size())), false);
                     mAdapter.addData(res, true);
+                } else {
+                    mAdapter.addInfo(new Repository(getString(R.string.empty_no_data_available)), true);
                 }
 
                 if (Util.isStringNotNull(mUserAsJson) &&
