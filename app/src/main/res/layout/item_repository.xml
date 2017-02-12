@@ -13,31 +13,25 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_5"
         android:textColor="@color/textPrimary"
-        android:layout_marginRight="@dimen/margin_8"
-        android:maxLines="1"
-        android:maxEms="10"
+        android:maxLines="2"
         android:ellipsize="end"
+        android:maxWidth="200dp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/iv_item_repository_forks_count"
         app:layout_constraintBottom_toTopOf="@+id/tv_item_repository_description" />
 
     <TextView
         android:id="@+id/tv_item_repository_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_4"
-        android:layout_marginRight="@dimen/margin_8"
-        android:maxLines="1"
-        android:maxEms="10"
-        android:ellipsize="end"
+        android:layout_marginTop="@dimen/margin_8"
         android:textSize="@dimen/text_size_4"
         android:textColor="@color/textSecondary"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintTop_toBottomOf="@id/tv_item_repository_name"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/iv_item_repository_forks_count"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
@@ -48,7 +42,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/tv_item_repository_forks_count"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@id/tv_item_repository_description"/>
 
     <TextView
         android:id="@+id/tv_item_repository_forks_count"
@@ -60,7 +54,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/tv_item_repository_watchers_count"
         app:layout_constraintLeft_toRightOf="@id/iv_item_repository_forks_count"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/tv_item_repository_description" />
 
 
     <ImageView
@@ -71,7 +65,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@id/tv_item_repository_forks_count"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@id/tv_item_repository_description"/>
 
     <TextView
         android:id="@+id/tv_item_repository_watchers_count"
@@ -83,6 +77,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@id/iv_item_repository_watchers_count"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/tv_item_repository_description" />
 
 </android.support.constraint.ConstraintLayout>

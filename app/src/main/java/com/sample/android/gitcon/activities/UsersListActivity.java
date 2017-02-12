@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -17,14 +17,13 @@ import com.sample.android.gitcon.activities.abstracts.AActivity;
 import com.sample.android.gitcon.adapters.UserListAdapter;
 import com.sample.android.gitcon.models.Follower;
 import com.sample.android.gitcon.models.Following;
-import com.sample.android.gitcon.models.User;
 import com.sample.android.gitcon.models.abstracts.AUser;
-import com.sample.android.gitcon.preferences.AppPreferences;
 import com.sample.android.gitcon.tasks.GetUserFollowersApiTask;
 import com.sample.android.gitcon.tasks.GetUserFollowingApiTask;
 import com.sample.android.gitcon.tasks.abstracts.SimpleTask;
 import com.sample.android.gitcon.ui.DividerItemDecoration;
 import com.sample.android.gitcon.ui.GitconProgressDialog;
+import com.sample.android.gitcon.utils.CompatibilityUtil;
 import com.sample.android.gitcon.utils.Util;
 import com.squareup.picasso.Picasso;
 
@@ -204,7 +203,14 @@ public class UsersListActivity
     }
 
     @Override
-    public void onUserClick(AUser user) {
-        startActivity(UserDetailsActivity.getIntent(this, user));
+    public void onUserClick(AUser user, View view) {
+        if (CompatibilityUtil.hasJellyBeanApi()) {
+            ActivityOptionsCompat avatarTransition = ActivityOptionsCompat.
+                    makeSceneTransitionAnimation(this, view, getString(R.string.transition_avatar));
+
+            startActivity(UserDetailsActivity.getIntent(this, user), avatarTransition.toBundle());
+        } else {
+            startActivity(UserDetailsActivity.getIntent(this, user));
+        }
     }
 }

@@ -11,6 +11,7 @@
         android:layout_height="64dp"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/margin_8"
+        android:transitionName="@string/transition_avatar"
         android:src="@drawable/github_logo"/>
     <View
         android:id="@+id/v_item_header_divider"

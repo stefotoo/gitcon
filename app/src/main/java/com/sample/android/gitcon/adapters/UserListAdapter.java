@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sample.android.gitcon.R;
-import com.sample.android.gitcon.models.User;
 import com.sample.android.gitcon.models.abstracts.AUser;
 import com.sample.android.gitcon.picasso.CircleTransform;
 import com.sample.android.gitcon.utils.Util;
@@ -59,6 +58,7 @@ public class UserListAdapter<T extends AUser> extends RecyclerView.Adapter<Recyc
         if (user != null && Util.isStringNotNull(user.getAvatarUrl())) {
             mPicasso
                     .load(user.getAvatarUrl())
+                    .placeholder(R.drawable.github_logo)
                     .fit()
                     .centerCrop()
                     .transform(new CircleTransform())
@@ -111,13 +111,13 @@ public class UserListAdapter<T extends AUser> extends RecyclerView.Adapter<Recyc
         @Override
         public void onClick(View view) {
             if (mCallback != null) {
-                mCallback.onUserClick(mUsers.get(getAdapterPosition()));
+                mCallback.onUserClick(mUsers.get(getAdapterPosition()), ivAvatar);
             }
         }
     }
 
     // interfaces
     public interface UserClickListener {
-        void onUserClick(AUser user);
+        void onUserClick(AUser user, View view);
     }
 }

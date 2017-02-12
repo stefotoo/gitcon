@@ -24,6 +24,7 @@ import com.sample.android.gitcon.tasks.LogOutTask;
 import com.sample.android.gitcon.tasks.abstracts.SimpleTask;
 import com.sample.android.gitcon.ui.DividerItemDecoration;
 import com.sample.android.gitcon.ui.GitconProgressDialog;
+import com.sample.android.gitcon.utils.CompatibilityUtil;
 import com.sample.android.gitcon.utils.Util;
 import com.squareup.picasso.Picasso;
 
@@ -109,6 +110,17 @@ public class UserDetailsActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (CompatibilityUtil.hasLollipopApi()) {
+            finishAfterTransition();
+        } else {
+            finish();
+        }
+
+        super.onBackPressed();
     }
 
     private void initExtras() {

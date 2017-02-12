@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.rey.material.widget.Button;
 import com.sample.android.gitcon.R;
 import com.sample.android.gitcon.models.Repository;
-import com.sample.android.gitcon.models.User;
 import com.sample.android.gitcon.models.abstracts.AUser;
 import com.sample.android.gitcon.picasso.CircleTransform;
 import com.sample.android.gitcon.utils.Util;
@@ -130,6 +129,7 @@ public class RepositoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 if (mUser != null && Util.isStringNotNull(mUser.getAvatarUrl())) {
                     mPicasso
                             .load(mUser.getAvatarUrl())
+                            .placeholder(R.drawable.github_logo)
                             .fit()
                             .centerCrop()
                             .transform(new CircleTransform())

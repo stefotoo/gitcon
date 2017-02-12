@@ -28,6 +28,9 @@
     <!-- Menus -->
     <string name="menu_logout">Log out</string>
 
+    <!-- Transitions -->
+    <string name="transition_avatar">avatar</string>
+
     <!-- Empty states -->
     <string name="empty_no_data_available">No data available.</string>
 
